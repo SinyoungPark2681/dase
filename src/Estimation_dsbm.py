@@ -3,19 +3,19 @@ import networkx as nx
 from sklearn.cluster import KMeans
 from sklearn.metrics import normalized_mutual_info_score
 import time
-import scipy.linalg as sp
-from sklearn.preprocessing import normalize
+# import scipy.linalg as sp
+# from sklearn.preprocessing import normalize
 from sklearn.mixture import GaussianMixture
 
 
-from scipy.sparse import csr_matrix
+# from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import eigsh
-from scipy.linalg import qr
+# from scipy.linalg import qr
 from sklearn.cluster import KMeans, MiniBatchKMeans
 from scipy.sparse.linalg import svds
 
-from scipy.linalg import blas
-from scipy import sparse
+# from scipy.linalg import blas
+# from scipy import sparse
 
 
 class ClusteringPipeline:
