@@ -1,5 +1,4 @@
-from Functions import GenDSBM_core, Estimation_dsbm, NMI
-from Functions.functions import *
+from src import Estimation_dsbm
 
 import warnings
 import matplotlib.pyplot as plt
@@ -11,6 +10,92 @@ import numpy as np
 import networkx as nx
 
 from scipy.sparse.linalg import svds
+
+
+def get_ratio(n, sparsity, relsize, p_matrix, k, seed=None):
+    if seed is not None:
+        np.random.seed(seed)
+
+    # Calculate the total possible edges (T)
+    T = n * (n-1)
+    
+    # Calculate the total expected edges (f)
+    f_intra = sum(p_matrix[i,i] * relsize[i] * (relsize[i]-1) for i in range(k))
+    f_inter1 = sum(p_matrix[i,j] * relsize[i] * relsize[j] for i in range(k) for j in range(i + 1, k))
+    f_inter2 = sum(p_matrix[j,i] * relsize[i] * relsize[j] for i in range(k) for j in range(i + 1, k))
+    f = f_intra + f_inter1 + f_inter2
+    
+    # Calculate scaling factors
+    c = sparsity * T / f
+        
+    return c * p_matrix
+
+
+def make_labels(n, cluster_sizes):
+    """
+    Generate cluster labels for a network with k clusters (0-indexed).
+
+    Parameters:
+    - n: Total number of nodes.
+    - cluster_sizes: List of sizes for each cluster. The sum of this list should equal n.
+
+    Returns:
+    - clusters: List of lists where each sublist contains the node indices for that cluster.
+    - labels: List of labels where each node index is assigned a label according to its cluster.
+    """
+    
+    if sum(cluster_sizes) != n:
+        raise ValueError("Sum of cluster sizes must equal the total number of nodes")
+
+    total_nodes = list(range(n))
+    clusters = []
+    labels = []
+
+    start_index = 0
+    for cluster_id, size in enumerate(cluster_sizes, start=0):  # 👈 start=0 으로 변경
+        end_index = start_index + size
+        cluster_nodes = total_nodes[start_index:end_index]
+        clusters.append(cluster_nodes)
+        labels.extend([cluster_id] * size)  # 이제 0부터 시작
+        start_index = end_index
+
+    return clusters, labels
+
+
+def calculate_relw_relb(n, relsize, p_matrix, k, sparsity, iteration):
+    
+    relw11 = []
+    relw22 = []
+    relb12 = []
+    relb21 = []
+    
+    for s in sparsity:
+        b11_list = []
+        b22_list = []
+        b12_list = []
+        b21_list = []
+        
+        for i in range(iteration):
+            
+            b_matrix = get_ratio(n, s, relsize, p_matrix, k, seed=i)
+            b11 = b_matrix[0, 0]
+            b22 = b_matrix[1, 1]
+            b12 = b_matrix[0, 1]
+            b21 = b_matrix[1, 0]
+            
+            b11_list.append(b11)
+            b22_list.append(b22)
+            b12_list.append(b12)
+            b21_list.append(b21)
+            
+        # Calculate mean values of b1 and b2 for this sparsity level
+        relw11.append(np.mean(b11_list))
+        relw22.append(np.mean(b22_list))
+        relb12.append(np.mean(b12_list))
+        relb21.append(np.mean(b21_list))
+    
+    return relw11, relw22, relb12, relb21
+
 
 
 def process_nodes_iterations_SBM(node_list, sparsity, iteration, size_ratio, P_matrix, d, k, direction, method):
