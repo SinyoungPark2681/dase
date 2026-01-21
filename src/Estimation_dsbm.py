@@ -3,19 +3,11 @@ import networkx as nx
 from sklearn.cluster import KMeans
 from sklearn.metrics import normalized_mutual_info_score
 import time
-# import scipy.linalg as sp
-# from sklearn.preprocessing import normalize
+
 from sklearn.mixture import GaussianMixture
-
-
-# from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import eigsh
-# from scipy.linalg import qr
 from sklearn.cluster import KMeans, MiniBatchKMeans
 from scipy.sparse.linalg import svds
-
-# from scipy.linalg import blas
-# from scipy import sparse
 
 
 class ClusteringPipeline:
@@ -79,7 +71,6 @@ class ClusteringPipeline:
     def gen_ASE(self, case='ASE1', k=2, d=2, rs=0, direction=True, method='GMM'):
 
         # Number of nodes in the network
-        # n = len(self.A)
         n = self.A.shape[0]
         A = self.A
         A = A.astype(float)
