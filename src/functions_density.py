@@ -1,4 +1,4 @@
-from src import Estimation_dsbm, NMI
+from src import Estimation_dsbm
 
 import warnings
 import matplotlib.pyplot as plt
