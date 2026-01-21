@@ -1,5 +1,4 @@
-from src import GenDSBM_core, Estimation_dsbm, NMI
-# from Functions.functions import *
+from src import Estimation_dsbm, NMI
 
 import warnings
 import matplotlib.pyplot as plt
