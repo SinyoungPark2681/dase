@@ -2,3 +2,11 @@
 
 ## Abstract
 Spectral clustering is a popular tool in network data analysis, with applications in a variety of scientific application areas. However, many studies have shown that spectral clustering does not perform well on certain network structures, particularly core-periphery networks. To improve clustering performance in core-periphery structures, Adjacency Spectral Embedding (ASE) has been introduced, which performs clustering via a network's adjacency matrix instead of the graph Laplacian. Despite its advantages in this setting, the optimal performance of ASE is limited to dense networks, whilst network data observed in practice is often sparse in nature. To address this limitation, we propose a new approach which we term Doubled Adjacency Spectral Embedding (DASE), motivated by the observation that the squared adjacency matrix will leverage the fewer connections in sparse structures more efficiently in clustering applications. Theoretical results establish that the resulting clustering algorithm enjoys good consistency properties when determining sparse community structure. The performance and general applicability of the proposed method is evaluated using extensive simulations on both directed and undirected networks. Our results highlight the improved clustering performance on both sparse and dense networks in the presence of core-periphery structures.  We illustrate our proposed technique on real-world employment and transportation datasets. 
+
+
+## Authors
+[Sinyoung Park](https://sinyoungpark2681.github.io/), [Sandipan Roy](https://sites.google.com/view/sandipanroy), [Matthew Nunes](https://people.bath.ac.uk/man54/homepage.html)
+
+
+## ArXiv link
+Preprint paper link can be found at [https://arxiv.org/abs/2512.11777]<br />
