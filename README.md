@@ -5,7 +5,7 @@ Spectral clustering is a popular tool in network data analysis, with application
 
 
 ## Authors
-[Sinyoung Park](https://sinyoungpark2681.github.io/), [Sandipan Roy](https://sites.google.com/view/sandipanroy), [Matthew Nunes](https://people.bath.ac.uk/man54/homepage.html)
+[Sinyoung Park](https://sinyoungpark2681.github.io/), [Matthew Nunes](https://people.bath.ac.uk/man54/homepage.html), [Sandipan Roy](https://sites.google.com/view/sandipanroy)
 
 
 ## ArXiv link
